@@ -1,5 +1,0 @@
-ECHO est  ativado.
-
-A
-A
-A
