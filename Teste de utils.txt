@@ -1,0 +1,7 @@
+import from preprocess import utils
+
+
+p = preprocessor()
+p.removePonctuation("Dar um pull é gostoso!")
+print(p.removePonctuation("Dar um pull é gostoso!"))
+

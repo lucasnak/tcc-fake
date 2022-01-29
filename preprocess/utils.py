@@ -8,11 +8,11 @@ nlp = spacy.load('pt_core_news_sm')
 class preprocessor:
 
 	def __init__(self):
-		with open('var/stopwords.txt') as f:
-			self.cachedStopWords = f.read()
+		#with open(r'var\stopwords.txt') as f:
+		#	self.cachedStopWords = f.read()
 		# self.cachedStopWords = stopwords.words('portuguese')
 		# self.stemmer = nltk.stem.SnowballStemmer('portuguese')
-		self.translator = str.maketrans({key:' ' for key in string.punctuation})
+		self.translator = str.maketrans({key:'' for key in string.punctuation})
 
 	def removePonctuation(self, string):
 		return string.translate(self.translator)
@@ -43,3 +43,4 @@ class preprocessor:
 			result = ' '.join([token.lemma_ for token in doc])
 
 		return result
+
