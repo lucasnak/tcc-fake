@@ -1,16 +1,17 @@
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 import unicodedata
-import nltk
+import spacy
 import re
 import string
+nlp = spacy.load('pt_core_news_sm')
 
 class preprocessor:
 
 	def __init__(self):
-		with open('fakenilc/var/stopwords.txt') as f:
+		with open('var/stopwords.txt') as f:
 			self.cachedStopWords = f.read()
 		# self.cachedStopWords = stopwords.words('portuguese')
-		self.stemmer = nltk.stem.SnowballStemmer('portuguese')
+		# self.stemmer = nltk.stem.SnowballStemmer('portuguese')
 		self.translator = str.maketrans({key:' ' for key in string.punctuation})
 
 	def removePonctuation(self, string):
@@ -20,20 +21,25 @@ class preprocessor:
 		return re.sub('[0-9]', '' , string)
 
 	def removeStopWords(self, string):
-		return ' '.join([word for word in string.lower().split() if word not in self.cachedStopWords])
+		doc = nlp(string)
+		return ' '.join([token.text for token in doc if token.is_stop is False])
 
-	def stemWords(self, string):
-		return ' '.join([self.stemmer.stem(word) for word in string.lower().split()])
+	def lemmatize(self, string):
+		doc = nlp(string)
+		return ' '.join([token.lemma_ for token in doc])
 
-	def prep(self, string, useStopWords = True, stem = True):
+	def prep(self, string, useStopWords = True, lemma = True):
 		#removing numbers and ponctuations
 		result = self.removeNumbers(self.removePonctuation(string)).lower()
 
-		if useStopWords and stem:
-			result = ' '.join([self.stemmer.stem(word) for word in result.split() if word not in self.cachedStopWords])
+		if useStopWords and lemma:
+			doc = nlp(result)
+			result = ' '.join([token.lemma_ for token in doc if token.is_stop is False])
 		elif useStopWords:
-			result = ' '.join([word for word in result.split() if word not in self.cachedStopWords])
-		elif stem:
-			result = ' '.join([self.stemmer.stem(word) for word in result.split()])
+			doc = nlp(result)
+			result = ' '.join([token.text for token in doc if token.is_stop is False])
+		elif lemma:
+			doc = nlp(result)
+			result = ' '.join([token.lemma_ for token in doc])
 
 		return result
