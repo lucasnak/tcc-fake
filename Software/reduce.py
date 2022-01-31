@@ -1,7 +1,7 @@
 import os
 import argparse
 
-import fakenilc.preprocess.reduce as rc
+import preprocess.reduce as rc
 
 
 # create a argparser
