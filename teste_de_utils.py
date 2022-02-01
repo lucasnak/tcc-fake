@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from preprocess import utils
+from sklearn.feature_extraction.text import CountVectorizer
+import pandas as pd
+import string
 
 fake =[]
-for i in range(1,4):
+for i in range(1,11):
     with open('testes\\fake'+str(i) + '.txt',encoding='utf8') as f:
         fake.append(f.read())
 
@@ -19,4 +22,23 @@ for text in fake:
     text = p.prep(text)
     for word in text.split():  
         lista.append(word)
-print(lista)
+#print(lista)
+
+listapd = pd.Series(lista)
+#print(listapd)
+
+#substring = "bolsonaro"
+#qntpalavra = lista.count(substring)
+#print(qntpalavra)
+
+substring = []
+for word in lista:
+    substring = word
+    qntpalavra = lista.count(substring)
+    print(qntpalavra)
+
+data = {'palavras': listapd, 'quantidade': qntpalavra}
+
+df = pd.DataFrame(data, columns=['palavras','quantidade'])
+
+print(df)
