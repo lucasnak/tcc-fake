@@ -15,7 +15,7 @@ import string
 
 #Leitura das notícias fakes e adicionando essas notícias em uma lista - lista de notícias
 fake =[]
-for i in range(1,601):
+for i in range(1,3603):
     with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
 
@@ -48,5 +48,5 @@ df = pd.DataFrame(data, columns=['palavras','quantidade'])
 print(df)
 
 #exportando dados para Excel
-#file_name = 'relacao_palavras_600.xlsx'
+#file_name = 'relacao_palavras_3602.xlsx'
 #df.to_excel(file_name)
