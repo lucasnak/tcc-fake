@@ -32,13 +32,19 @@ listapd = pd.Series(lista)
 #print(qntpalavra)
 
 substring = []
+qntpalavra = []
 for word in lista:
     substring = word
-    qntpalavra = lista.count(substring)
-    print(qntpalavra)
+    qntpalavra.append(lista.count(substring))
+    #print(qntpalavra)
 
 data = {'palavras': listapd, 'quantidade': qntpalavra}
 
 df = pd.DataFrame(data, columns=['palavras','quantidade'])
 
+#print(data['quantidade'])
 print(df)
+
+#exportando dados para Excel
+#file_name = 'relacao_palavras.xlsx'
+#df.to_excel(file_name)
