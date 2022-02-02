@@ -15,8 +15,8 @@ import string
 
 #Leitura das notícias fakes e adicionando essas notícias em uma lista - lista de notícias
 fake =[]
-for i in range(1,11):
-    with open('testes\\fake'+str(i) + '.txt',encoding='utf8') as f:
+for i in range(1,601):
+    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
 
 #Texto recebe o preprocessamento do utils - fakenilc e cada palavra de cada texto se torna um item da lista "lista"
@@ -48,5 +48,5 @@ df = pd.DataFrame(data, columns=['palavras','quantidade'])
 print(df)
 
 #exportando dados para Excel
-#file_name = 'relacao_palavras.xlsx'
+#file_name = 'relacao_palavras_600.xlsx'
 #df.to_excel(file_name)
