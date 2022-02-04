@@ -14,10 +14,10 @@ import string
 
 
 #Leitura das notícias fakes e true e adicionando essas notícias em uma lista - lista de notícias
-fake =[]
-for i in range(1,3603):
-    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
-        fake.append(f.read())
+#fake =[]
+#for i in range(1,3603):
+#    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
+#        fake.append(f.read())
 
 true =[]
 for i in range(1,3603):
@@ -27,11 +27,12 @@ for i in range(1,3603):
 
 #Texto recebe o preprocessamento do "utils - fakenilc" e cada palavra de cada texto se torna um item da lista "listaf" ou "listat"
 p = utils.preprocessor()
-listaf = []
-for text in fake:
-    text = p.prep(text)
-    for word in text.split():  
-        listaf.append(word)
+
+#listaf = []
+#for text in fake:
+#    text = p.prep(text)
+#    for word in text.split():  
+#        listaf.append(word)
 
 listat = []
 for text in true:
@@ -40,24 +41,39 @@ for text in true:
         listat.append(word)
 
 
-#A Biblioteca String possuí o atributo .count que conta quantas vezes a "substring" aparece na lista "lista"
-substring = []
-qntpalavra = []
-for word in lista:
-    substring = word
-    qntpalavra.append(lista.count(substring))
-    #print(qntpalavra)
+#A Biblioteca String possuí o atributo .count que conta quantas vezes a "substring" aparece na lista "listaf" ou "listat"
+#substringf = []
+#qntpalavraf = []
+#for word in listaf:
+#    substringf = word
+#    qntpalavraf.append(listaf.count(substringf))
+    #print(qntpalavraf)
 
-#"Lista" é convertida em uma série do Pandas 
-listapd = pd.Series(lista)
+substringt = []
+qntpalavrat = []
+for word in listat:
+    substringt = word
+    qntpalavrat.append(listat.count(substringt))
+    #print(qntpalavrat)
 
-data = {'palavras': listapd, 'quantidade': qntpalavra}
 
-df = pd.DataFrame(data, columns=['palavras','quantidade'])
+#"listaf" e "listat" é convertida em uma série do Pandas 
+#listafpd = pd.Series(listaf)
+listatpd = pd.Series(listat)
+
+#dataf = {'palavras': listafpd, 'quantidade': qntpalavraf}
+#dff = pd.DataFrame(dataf, columns=['palavras','quantidade'])
+
+datat = {'palavras': listatpd, 'quantidade': qntpalavrat}
+dft = pd.DataFrame(datat, columns=['palavras','quantidade'])
 
 #printando a tabela de palavras 
-print(df)
+#print(dff)
+#print(dft)
 
 #exportando dados para Excel
-#file_name = 'relacao_palavras_3602.xlsx'
-#df.to_excel(file_name)
+#file_namef = 'relacao_palavras_f_3602.xlsx'
+#dff.to_excel(file_namef)
+
+file_namet = 'relacao_palavras_t_3602.xlsx'
+dft.to_excel(file_namet)
