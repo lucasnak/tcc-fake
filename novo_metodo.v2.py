@@ -20,7 +20,7 @@ import string
 #        fake.append(f.read())
 
 true =[]
-for i in range(1,3603):
+for i in range(1,686):
     with open('Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
         true.append(t.read())
 
@@ -75,5 +75,5 @@ dft = pd.DataFrame(datat, columns=['palavras','quantidade'])
 #file_namef = 'relacao_palavras_f_3602.xlsx'
 #dff.to_excel(file_namef)
 
-file_namet = 'relacao_palavras_t_3602.xlsx'
+file_namet = 'relacao_palavras_t_685.xlsx'
 dft.to_excel(file_namet)
