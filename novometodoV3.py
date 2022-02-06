@@ -14,10 +14,10 @@ import string
 
 
 #Leitura das notícias fakes e true e adicionando essas notícias em uma lista - lista de notícias
-#fake =[]
-#for i in range(1,3603):
-#    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
-#        fake.append(f.read())
+fake =[]
+for i in range(1,6):
+    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
+        fake.append(f.read())
 
 true =[]
 for i in range(1,6):
@@ -28,11 +28,11 @@ for i in range(1,6):
 #Texto recebe o preprocessamento do "utils - fakenilc" e cada palavra de cada texto se torna um item da lista "listaf" ou "listat"
 p = utils.preprocessor()
 
-#listaf = []
-#for text in fake:
-#    text = p.prep(text)
-#    for word in text.split():  
-#        listaf.append(word)
+listaf = []
+for text in fake:
+    text = p.prep(text)
+    for word in text.split():  
+        listaf.append(word)
 
 listat = []
 for text in true:
@@ -42,11 +42,11 @@ for text in true:
 
 
 #A Biblioteca String possuí o atributo .count que conta quantas vezes a "substring" aparece na lista "listaf" ou "listat"
-#substringf = []
-#qntpalavraf = []
-#for word in listaf:
-#    substringf = word
-#    qntpalavraf.append(listaf.count(substringf))
+substringf = []
+qntpalavraf = []
+for word in listaf:
+    substringf = word
+    qntpalavraf.append(listaf.count(substringf))
     #print(qntpalavraf)
 
 substringt = []
@@ -58,19 +58,26 @@ for word in listat:
 
 
 #"listaf" e "listat" é convertida em uma série do Pandas 
-#listafpd = pd.Series(listaf)
+listafpd = pd.Series(listaf)
 listatpd = pd.Series(listat)
 
-#dataf = {'palavras': listafpd, 'quantidade': qntpalavraf}
-#dff = pd.DataFrame(dataf, columns=['palavras','quantidade'])
 
-datat = {'palavras': listatpd, 'quantidade': qntpalavrat}
-dft = pd.DataFrame(datat, columns=['palavras','quantidade'])
-#dft.drop_duplicates(subset="palavras")
-dft_ordenado = dft.sort_values("quantidade")
-#printando a tabela de palavras 
-#print(dff)
-print(dft_ordenado)
+#Criando e organizando DataFrames
+def palavras_pesos(listafpd, qntpalavraf, listatpd, qntpalavrat):
+    dataf = {'palavras': listafpd, 'quantidade': qntpalavraf}
+    dff = pd.DataFrame(dataf, columns=['palavras','quantidade'])
+    dff_unique = dff.drop_duplicates(subset="palavras")
+    dff_ordenado = dff_unique.sort_values("quantidade", ascending=False)
+
+    datat = {'palavras': listatpd, 'quantidade': qntpalavrat}
+    dft = pd.DataFrame(datat, columns=['palavras','quantidade'])
+    dft_unique = dft.drop_duplicates(subset="palavras")
+    dft_ordenado = dft_unique.sort_values("quantidade", ascending=False)
+
+    resultado = pd.merge(dft_ordenado,dff_ordenado, how = 'outer')
+    return resultado
+
+
 
 #exportando dados para Excel
 #file_namef = 'relacao_palavras_f_3602.xlsx'
