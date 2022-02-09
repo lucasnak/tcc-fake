@@ -42,6 +42,7 @@ for text in true:
 
 
 #A Biblioteca String possuí o atributo .count que conta quantas vezes a "substring" aparece na lista "listaf" ou "listat"
+#Poderiamos simplesmente transformas as listas acima em df e usar values_counts() que conta quantas vezes um mesmo item aparece na coluna desejada
 substringf = []
 qntpalavraf = []
 for word in listaf:
@@ -67,7 +68,9 @@ def palavras_pesos(listafpd, qntpalavraf, listatpd, qntpalavrat):
     dataf = {'palavras': listafpd, 'quantidade': qntpalavraf}
     dff = pd.DataFrame(dataf, columns=['palavras','quantidade'])
     dff_unique = dff.drop_duplicates(subset="palavras")
+    dff_unique['quantidade'] = dff_unique['quantidade']*-1 # multiplicação para que as palavras falsas tenham quantidades (pesos) negativas
     dff_ordenado = dff_unique.sort_values("quantidade", ascending=False)
+
 
     datat = {'palavras': listatpd, 'quantidade': qntpalavrat}
     dft = pd.DataFrame(datat, columns=['palavras','quantidade'])

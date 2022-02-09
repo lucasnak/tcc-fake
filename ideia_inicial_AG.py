@@ -36,6 +36,20 @@ n_geracoes = 100
 #individuo = tabela.drop(index=3)
 
 cond = (tabela.quantidade > 6)
-individuo = tabela[cond]
+melhores_palavras_true = tabela[cond]
 
+cond = (tabela.quantidade < -6)
+melhores_palavras_fake = tabela[cond]
+
+melhores_palavras = pd.merge(melhores_palavras_true,melhores_palavras_fake, how='outer')
+
+
+#Somar melhores palavras iguais para formação dos pesos
+melhores_palavras_agrupadas = melhores_palavras.groupby('palavras').sum()
+melhores_palavras_agrupadas_ordenadas = melhores_palavras_agrupadas.sort_values("quantidade",ascending=False)
+
+
+individuo = melhores_palavras_agrupadas_ordenadas['quantidade'].tolist()
+
+print(melhores_palavras_agrupadas_ordenadas)
 print(individuo)
