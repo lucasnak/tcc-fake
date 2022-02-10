@@ -1,6 +1,8 @@
 from ast import Index
 from operator import index
+from tkinter.tix import COLUMN
 from novometodoV3 import *
+import numpy as np
 
 
 #1 - implementar em novo método.py
@@ -43,13 +45,79 @@ melhores_palavras_fake = tabela[cond]
 
 melhores_palavras = pd.merge(melhores_palavras_true,melhores_palavras_fake, how='outer')
 
+#analisando o df
+print(melhores_palavras)
 
 #Somar melhores palavras iguais para formação dos pesos
 melhores_palavras_agrupadas = melhores_palavras.groupby('palavras').sum()
-melhores_palavras_agrupadas_ordenadas = melhores_palavras_agrupadas.sort_values("quantidade",ascending=False)
 
 
-individuo = melhores_palavras_agrupadas_ordenadas['quantidade'].tolist()
+#analisando o df
+print(melhores_palavras_agrupadas)
 
-print(melhores_palavras_agrupadas_ordenadas)
-print(individuo)
+mpao = melhores_palavras_agrupadas.sort_values("quantidade",ascending=False)
+
+
+individuo = mpao['quantidade'].tolist()  #mpao = melhores palavras agrupadas ordenadas
+
+
+#print(individuo)
+
+
+
+#Ideia de como codificar o AG
+
+#Objetivo do AG = acertar 1000 notícias como true ou fake
+#Quanto mais notícas o AG acertar, melhor é a população e o indivíduo
+
+#O que o AG terá que fazer para atingir esses objetivos:
+
+#Identificar cada palavra preprocessada de uma nóticia específica
+#As palavras que ele identificar como críticas, associar o peso delas numa soma
+#Se ao final da soma o valor for positivo, o AG classifica a notícia como True, se a soma for negativa, a notícia é fake
+#O indivíduo que atingir a maior pontuação é o melhor de todos e um nova geração deve recomeçar com  devida mutação
+
+
+#Identificar cada palavra preprocessada de uma notícia específica
+
+    # O rol de palavras de teste será as notícias ture e fake de 5201 a 6200
+
+#Identificação das palavras críticas
+#print(mpao)
+
+
+###Transformando cada notícia de teste em uma lista de palavras e colocar essas listas em uma lista "notícias"
+## Abrindo as notícias de teste
+fake =[]
+for i in range(3001,3002):
+    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
+        fake.append(f.read())
+
+true =[]
+for i in range(3001,3002):
+    with open('Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
+        true.append(t.read())
+
+## Preprocessando as palavras e colocando na lista "notícias"
+p = utils.preprocessor()
+
+noticias = []
+aux = []
+for text in fake:
+    aux.append(p.prep(text))
+    noticias.append(aux)
+
+
+#Localização dessas palavras nas notícias teste
+soma = 0
+escolhidas = melhores_palavras['palavras'].tolist()
+for noticia in noticias:  #vai analisar as 200 notícias teste
+    for word in escolhidas: #para cada notícia, ele vai rodar cada palavras para as escolhidas como referência
+        noticia = np.array(noticia)
+        if np.where(noticia == word): #vai procurar a palavra de referência na notícia analisada
+            soma = soma  + melhores_palavras.loc[melhores_palavras.index[melhores_palavras['palavras'] == word],'quantidade'] # mpao[] ==word encontra a palavra analisada no df das palavras de referencia. mpao. index acha a posisão dessa palavra no df mpao e mpao.loc encontra o valor "quantidade na posisão da palavra"
+        print(soma)
+    if soma >= 0:
+        print('notícia verdadeira')
+    else:
+        print('notícia falsa')  
