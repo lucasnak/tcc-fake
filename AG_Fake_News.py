@@ -109,12 +109,19 @@ for text in fake:
     aux.append(p.prep(text))
     noticias.append(aux)
 
+for text in true:
+    aux.append(p.prep(text))
+    noticias.append(aux)
+
 #print(noticias)
 
 #Localização dessas palavras nas notícias teste
 lista =[]
 listanova =[]
 soma = 0
+
+conta_fake = 0
+conta_true = 0
 
 escolhidas = melhores_palavras['palavras'].tolist()
 for noticia1 in noticias:  #vai analisar as 200 notícias teste
