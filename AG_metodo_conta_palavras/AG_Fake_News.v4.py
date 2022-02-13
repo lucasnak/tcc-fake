@@ -1,27 +1,43 @@
+#Área de importações
+
 from ast import Index
 from operator import index
 from socket import NI_NUMERICHOST
 from tkinter.tix import COLUMN
-from novometodoV3 import *
+from analisador import *
 import numpy as np
 import string
 
-#1 - implementar em novo método.py
-    # - Soma das quantidades de palavras iguais entre a lista de true e fake
-    # Ex:   Palavras    #True   #Fake   #peso
-    #       presidente   1000    1300   -300
+#--------------------------------------------------------------------------------------------------
 
 
-# -  Importar do novo método o dataframe de palavras e peso
 
-# -  Associar cada palavra ao seu índice para que quando o código análise a notícia de treino e teste, haja identificação entre palavra e peso
+# ---------------------------CRIAÇÃO DA PRIMEIRA GERAÇÃO DE INDIVÍDUOS-----------------------------
 
-
-tabela = palavras_pesos(listafpd, qntpalavraf, listatpd, qntpalavrat)
-
+# Elementos de avaliação e tunagem----------------------------------------------------------------- 
+nota_corte_pesos = 1000
+respostas_real =[] # Armazena a informação se a notícia a ser classificada é true ou fake para cálculo de acurácia - Recebe 1 ou 0 dependendo se a notícia que será classificada é true ou fake
 pontuacao_true = 0
 n_cromossomos = 100
 n_geracoes = 100
+
+# Importação de todas as palavras analisadas ------------------------------------------------------
+tabela = palavras_pesos(listafpd, qntpalavraf, listatpd, qntpalavrat) # Importa do analisador as palavras com seus pesos (palavras_pesos é um def do outro arquivo)
+
+# Seleção das melhores palavras com base no peso que cada palavra recebeu ------------------------- 
+cond = (tabela.quantidade > nota_corte_pesos)
+melhores_palavras_true = tabela[cond]
+
+cond = (tabela.quantidade < nota_corte_pesos)
+melhores_palavras_fake = tabela[cond]
+
+melhores_palavras = pd.merge(melhores_palavras_true,melhores_palavras_fake, how='outer')
+
+melhores_palavras.to_excel('mehores_palavras.xlsx')
+
+#--------------------------------------------------------------------------------------------------
+
+
 
 
 #Criação da População
@@ -38,16 +54,11 @@ n_geracoes = 100
 #individuo = tabela.index.isin([0,1,2,3,4,5,6,7,8,9,10])
 #individuo = tabela.drop(index=3)
 
-cond = (tabela.quantidade > 6)
-melhores_palavras_true = tabela[cond]
 
-cond = (tabela.quantidade < -6)
-melhores_palavras_fake = tabela[cond]
-
-melhores_palavras = pd.merge(melhores_palavras_true,melhores_palavras_fake, how='outer')
 
 
 #analisando o df
+print("Estas são as melhores palavras para virarem genes")
 print(melhores_palavras)
 
 #Somar melhores palavras iguais para formação dos pesos
@@ -55,12 +66,13 @@ melhores_palavras_agrupadas = melhores_palavras.groupby('palavras').sum()
 
 
 #analisando o df
+print("Estas são as melhores palavras agrupadas para virarem genes")
 print(melhores_palavras_agrupadas)
 
-mpao = melhores_palavras_agrupadas.sort_values("quantidade",ascending=False)
+#mpao = melhores_palavras_agrupadas.sort_values("quantidade",ascending=False)
 
 
-individuo = mpao['quantidade'].tolist()  #mpao = melhores palavras agrupadas ordenadas
+#individuo = mpao['quantidade'].tolist()  #mpao = melhores palavras agrupadas ordenadas
 
 
 #print(individuo)
@@ -90,15 +102,18 @@ individuo = mpao['quantidade'].tolist()  #mpao = melhores palavras agrupadas ord
 
 ###Transformando cada notícia de teste em uma lista de palavras e colocar essas listas em uma lista "notícias"
 ## Abrindo as notícias de teste
+
 fake =[]
-for i in range(3001,3002):
+for i in range(3001,3201):
     with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
+    respostas_real.append(1)
 
 true =[]
-for i in range(3001,3002):
+for i in range(3001,3201):
     with open('Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
         true.append(t.read())
+    respostas_real.append(0)
 
 ## Preprocessando as palavras e colocando na lista "notícias"
 p = utils.preprocessor()
@@ -106,12 +121,12 @@ p = utils.preprocessor()
 noticias = []
 aux = []
 for text in fake:
-    aux.append(p.prep(text))
-    noticias.append(aux)
+    noticias.append(p.prep(text))
+    
 
 for text in true:
-    aux.append(p.prep(text))
-    noticias.append(aux)
+    noticias.append(p.prep(text))
+    
 
 #print(noticias)
 
@@ -122,20 +137,32 @@ soma = 0
 
 conta_fake = 0
 conta_true = 0
+resultados = []
 
 escolhidas = melhores_palavras['palavras'].tolist()
-for noticia1 in noticias:  #vai analisar as 200 notícias teste
-    noticia=str(noticia1)
-    for word in noticia.split():
+for noticia in noticias:  #vai analisar as 200 notícias teste
+    soma = 0
+    noticia_str=str(noticia)
+    print("print das notícias separadas uma a uma")
+    print(noticia_str)
+    for word in noticia_str.split():
         lista.append(word)
         listanova = np.array(lista)
+    print("palavras de cada notícia sendo separadas")
     print (listanova)
     
-    
+   
+    i = 0
     for word in escolhidas: #para cada notícia, ele vai rodar cada palavras para as escolhidas como referência           
         aux2 = np.where(listanova == word) #vai procurar a palavra de referência na notícia analisada
+        print('este é aux2')
+        print(aux2)
         aux3 = list(aux2)
+        print('este é aux3')
+        print(aux3)
         aux4 = (aux3[0])
+        print('este é aux4')
+        print(aux4)
         #print(len(aux4))
         if len(aux4) != 0: 
             indice = melhores_palavras.index[melhores_palavras['palavras'] == word]
@@ -143,16 +170,36 @@ for noticia1 in noticias:  #vai analisar as 200 notícias teste
             numero = melhores_palavras.loc[indice,'quantidade'] # mpao[] ==word encontra a palavra analisada no df das palavras de referencia. mpao. index acha a posisão dessa palavra no df mpao e mpao.loc encontra o valor "quantidade na posisão da palavra"
             print(numero)
             numero_num = int(numero)
-            soma = soma + numero_num 
-        print(soma)
-    if soma > 0:
+            soma = soma + numero_num
+    resultados.append(soma) 
+print(resultados)
+
+respostas =[]
+for resultado in resultados:
+    if resultado > 0:
         print('notícia verdadeira')
-        conta_true = conta_true + 1
+        respostas.append(1)
+    
     else:
         print('notícia falsa')
-        conta_fake = conta_fake + 1
+        respostas.append(0)
+       
 
+print(respostas_real)
+print(respostas)
 
+dic_respostas_real = {"Avaliacao": respostas_real}
+dic_respostas = {"Avaliacao": respostas}
+
+df_respostas_real = pd.DataFrame(dic_respostas_real)
+df_respostas = pd.DataFrame(dic_respostas)
+
+print(df_respostas == df_respostas_real)
+
+total_iguais = np.sum(df_respostas == df_respostas_real)
+total = len(df_respostas)
+acuracia = total_iguais/total
+print(acuracia)
 # Resultado da geração
 
 # A ideia é fazer o contador de true e fake ficar o mais próximo possível da contagem real  

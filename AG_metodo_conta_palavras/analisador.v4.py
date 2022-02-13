@@ -1,6 +1,6 @@
 #Importações
 # -*- coding: utf-8 -*-
-from preprocess import utils
+from preprocess import utils_spacy
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 import string
@@ -15,18 +15,18 @@ import string
 
 #Leitura das notícias fakes e true e adicionando essas notícias em uma lista - lista de notícias
 fake =[]
-for i in range(1,6):
-    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
+for i in range(1,11): #Parece que 1000 é bom
+    with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
 
 true =[]
-for i in range(1,6):
-    with open('Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
+for i in range(1,3): #Parece que 182 respeita a proporção do 1000
+    with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
         true.append(t.read())
 
 
 #Texto recebe o preprocessamento do "utils - fakenilc" e cada palavra de cada texto se torna um item da lista "listaf" ou "listat"
-p = utils.preprocessor()
+p = utils_spacy.preprocessor()
 
 listaf = []
 for text in fake:

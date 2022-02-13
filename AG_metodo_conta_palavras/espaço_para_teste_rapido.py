@@ -10,6 +10,18 @@ listaf = []
 aux = []
 for text in fake:
     aux.append(p.prep(text))
+    print(aux)
     listaf.append(aux)
         
 print(listaf)
+
+#listaf = []
+#for text in fake:
+#    text = p.prep(text)
+#    for word in text.split():  
+#        listaf.append(word)
+
+
+#for i in listaf[0]:
+#    print(i)
+
