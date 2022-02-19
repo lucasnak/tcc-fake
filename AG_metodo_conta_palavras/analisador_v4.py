@@ -15,12 +15,12 @@ import string
 
 #Leitura das notícias fakes e true e adicionando essas notícias em uma lista - lista de notícias
 fake =[]
-for i in range(1,11): #Parece que 1000 é bom
+for i in range(1,41): #Parece que 1000 é bom
     with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
 
 true =[]
-for i in range(1,3): #Parece que 182 respeita a proporção do 1000
+for i in range(1,16): #Parece que 182 respeita a proporção do 1000
     with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
         true.append(t.read())
 

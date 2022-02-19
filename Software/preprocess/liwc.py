@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-from fakenilc.preprocess import utils
+from preprocess import utils
 
 class LIWC:
 

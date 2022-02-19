@@ -2,7 +2,7 @@ import os
 import sys
 import argparse
 import logging
-from fakenilc.preprocess import liwc, bow, pos, syntax, metrics
+from preprocess import liwc, bow, pos, syntax, metrics
 import numpy as np
 import pandas as pd
 

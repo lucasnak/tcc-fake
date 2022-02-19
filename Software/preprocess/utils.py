@@ -1,3 +1,5 @@
+#utils modificado L&V
+
 #from nltk.corpus import stopwords
 import unicodedata
 import spacy

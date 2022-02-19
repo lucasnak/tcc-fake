@@ -5,14 +5,14 @@ from operator import index
 from random import randint
 from socket import NI_NUMERICHOST
 from tkinter.tix import COLUMN
-from analisador import *
+from analisador_v4 import *
 import numpy as np
 import string
 
 #---------------------------- PARÂMETROS DE TUNAGEM------------------------------------------------
 
 # Elementos de avaliação e tunagem----------------------------------------------------------------- 
-nota_corte_pesos = 1000
+nota_corte_pesos = 15
 respostas_real =[] # Armazena a informação se a notícia a ser classificada é true ou fake para cálculo de acurácia - Recebe 1 ou 0 dependendo se a notícia que será classificada é true ou fake
 n_cromossomos = 100
 n_geracoes = 100
@@ -32,7 +32,7 @@ tabela = palavras_pesos(listafpd, qntpalavraf, listatpd, qntpalavrat) # Importa 
 cond = (tabela.quantidade > nota_corte_pesos)
 melhores_palavras_true = tabela[cond]
 
-cond = (tabela.quantidade < nota_corte_pesos)
+cond = (tabela.quantidade < -40)
 melhores_palavras_fake = tabela[cond]
 
 melhores_palavras = pd.merge(melhores_palavras_true,melhores_palavras_fake, how='outer')
@@ -49,14 +49,14 @@ melhores_palavras.to_excel('mehores_palavras.xlsx')
 # --------------------------------- CRIAÇÃO DA PRIMEIRA GERAÇÃO -----------------------------------
                         # AINDA NÃO ESTÁ NO CÓDIGO - CÓDIGO RODA APENAS COM 1 INDIVÍDUO
 
-mutacao = []
-melhores_palavras_np = np.array(melhores_palavras)
+#mutacao = []
+#melhores_palavras_np = np.array(melhores_palavras)
 
-for i in range(melhores_palavras):
-    mutacao.append(randint(dim_peso,aum_peso))
+#for i in range(melhores_palavras):
+#    mutacao.append(randint(dim_peso,aum_peso))
 
-for i in range(n_cromossomos):
-    add_mutacao = np.append(melhores_palavras,mutacao,axis = 1) #Na verdade, preciso de várias lista de melhores palavras com pesos mutados
+#for i in range(n_cromossomos):
+#    add_mutacao = np.append(melhores_palavras,mutacao,axis = 1) #Na verdade, preciso de várias lista de melhores palavras com pesos mutados
 
 # -------------------------------------------------------------------------------------------------
 
@@ -67,19 +67,19 @@ for i in range(n_cromossomos):
 ## Abrindo as notícias para classificação ---------------------------------------------------------
 
 fake =[]
-for i in range(3001,3201):
-    with open('Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
+for i in range(3001,3003):
+    with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\fake\\'+str(i)+'.txt',encoding='utf8') as f:
         fake.append(f.read())
     respostas_real.append(0) #Armazena na variável que essa notícia é de fato fake
 
 true =[]
-for i in range(3001,3201):
-    with open('Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
+for i in range(3001,3003):
+    with open('C:\\Users\\vitor\\Documents\\TCC.v3\\Corpus-alternativo\\true\\'+str(i)+'.txt',encoding='utf8') as t:
         true.append(t.read())
     respostas_real.append(1) #Armazena na variável que essa notícia é de fato fake
 
 ## Preprocessando as palavras das notícias a serem classificadas e colocando na lista "notícias"
-p = utils.preprocessor()
+p = utils_spacy.preprocessor()
 
 noticias = []
 aux = []
@@ -102,6 +102,9 @@ soma = 0
 resultados = []
 
 escolhidas = melhores_palavras['palavras'].tolist() # Pegando somente a coluna das palavras em "melhores_palavras"
+print("Estas são as melhores palavras")
+print(melhores_palavras)
+
 
 for noticia in noticias:  # Objetivo é analisar a quantidade de notícias escolhidas para serem classificadas
     soma = 0 # Se ao final da análise feita pelo for, a variável soma for >0, a notiíca é true, caso contrário, fake
