@@ -2,7 +2,7 @@ import os
 import sys
 import argparse
 import logging
-from preprocess import liwc, bow, posspacy, syntax, metrics
+from preprocess import liwc, bow, posSpacy, syntax, metrics
 import numpy as np
 import pandas as pd
 
@@ -14,7 +14,7 @@ def parseArguments():
 		'unigram-binary',
 		# all these extraction methods arent working correctly
 		# 'liwc',
-		# 'pos',
+		'posSpacy',
 		# 'metrics',
 		# 'pausality',
 		# 'uncertainty',
@@ -103,9 +103,9 @@ def prepareCalls(parameters, filenames, tags, output_dir):
 	calls = []
 	for feature in parameters:
 		#extracts POS
-		if feature.lower() == 'pos':
+		if feature.lower() == 'posSpacy':
 			#loadPos(filenames):
-			calls.append((posspacy.loadPos,[filenames]))
+			calls.append((posSpacy.loadPos,[filenames]))
 		#extracts LIWC tags
 		elif feature.lower() == 'liwc':
 			# loadLiwc(filenames):

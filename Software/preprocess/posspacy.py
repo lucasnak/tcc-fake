@@ -1,3 +1,5 @@
+#pos modificado L&V
+
 # -*- coding: utf-8 -*-
 
 import pandas as pd
@@ -66,6 +68,7 @@ def countTags(text, tagger, normalize=True):
 
 #function that loads the corpus and counts LIWC classes frequencies
 nlp = spacy.load("pt_core_news_sm")
+
 def loadPos(filenames):
 	data = []	
 	
