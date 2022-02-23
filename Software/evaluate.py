@@ -13,7 +13,7 @@ from sklearn.feature_selection import SelectKBest, mutual_info_classif
 from sklearn.pipeline import make_pipeline
 import pandas as pd 
 import numpy as np
-from fakenilc.preprocess import bow
+from preprocess import bow
 
 #TODO: add logging system, and remove prints
 

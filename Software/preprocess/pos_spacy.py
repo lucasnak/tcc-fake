@@ -10,7 +10,7 @@ from collections import Counter
 import warnings
 with warnings.catch_warnings():
 	warnings.filterwarnings("ignore",category=FutureWarning)
-	from nlpnet import POSTagger
+	#from nlpnet import POSTagger
 
 
 def countTags(text, tagger, normalize=True):
@@ -53,32 +53,32 @@ def countTags(text, tagger, normalize=True):
 
 	return result
 
-def vectorize(text, tagger = None):
+# def vectorize(text, tagger = None):
 
-	if tagger == None:
-		tagger = POSTagger(r'var/nlpnet', language='pt')
+# 	if tagger == None:
+# 		tagger = POSTagger(r'var/nlpnet', language='pt')
 
-	labels = list({'ADJ': 0, 'ADV': 0, 'ADV-KS': 0, 'ART': 0, 'CUR': 0, 'IN': 0, 'KC': 0, 'KS': 0, 'N': 0, 'NPROP': 0, 'NUM': 0, 'PCP': 0, 'PDEN': 0, 'PREP': 0, 'PROADJ': 0, 'PRO-KS': 0, 'PROPESS': 0, 'PROSUB': 0, 'V': 0, 'PU': 0}.keys())
-	freqs = countTags(text,tagger)
+# 	labels = list({'ADJ': 0, 'ADV': 0, 'ADV-KS': 0, 'ART': 0, 'CUR': 0, 'IN': 0, 'KC': 0, 'KS': 0, 'N': 0, 'NPROP': 0, 'NUM': 0, 'PCP': 0, 'PDEN': 0, 'PREP': 0, 'PROADJ': 0, 'PRO-KS': 0, 'PROPESS': 0, 'PROSUB': 0, 'V': 0, 'PU': 0}.keys())
+# 	freqs = countTags(text,tagger)
 
-	return pd.DataFrame([freqs],columns=labels)
+# 	return pd.DataFrame([freqs],columns=labels)
 
 
 #function that loads the corpus and counts LIWC classes frequencies
 nlp = spacy.load("pt_core_news_sm")
 def loadPos(filenames):
-    data = []	
+	data = []	
 	
 	#loading files
 	for filename in filenames:
-        with open(filename, encoding='utf8') as f:
-		    #preprocesses the text read in f using prep()
+		with open(filename, encoding='utf8') as f:
+			#preprocesses the text read in f using prep()
 		    #then counts the frequencies using the tagger
 		    #returns a list with frequencies
-            doc = nlp(f.read())
-            for sent in doc.sents:
-                for token in sent:
-                    c = Counter(([token.pos_ for token in sent for sent in doc.sents]))
-                    print (c)
-                data.append(c)
-    return pd.DataFrame(data,columns=c.keys())
+			doc = nlp(f.read())
+			for sent in doc.sents:
+				for token in sent:
+					c = Counter(([token.pos_ for token in sent for sent in doc.sents]))
+					print (c)
+					data.append(c)
+	return pd.DataFrame(data,columns=c.keys())
