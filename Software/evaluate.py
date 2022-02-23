@@ -15,7 +15,6 @@ import pandas as pd
 import numpy as np
 from preprocess import bow
 
-#TODO: add logging system, and remove prints
 
 def prepareArgParser():
 	clf_choices = ['svc','linearsvc','naive_bayes','randomforest', 'all', 'mlp']
