@@ -15,9 +15,9 @@ import pandas as pd
 import numpy as np
 from preprocess import bow
 
-
 def prepareArgParser():
-	clf_choices = ['svc','linearsvc','naive_bayes','randomforest', 'all', 'mlp']
+	clf_choices = ['linearsvc','naive_bayes','randomforest', 'all', 'mlp']
+
 	
 
 	arg_parser = argparse.ArgumentParser(description='A fake news classifier training system')
