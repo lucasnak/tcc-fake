@@ -105,7 +105,7 @@ def prepareCalls(parameters, filenames, tags, output_dir):
 		#extracts POS
 		if feature.lower() == 'pos':
 			#loadPos(filenames):
-			calls.append((pos.loadPos,[filenames]))
+			calls.append((posspacy.loadPos,[filenames]))
 		#extracts LIWC tags
 		elif feature.lower() == 'liwc':
 			# loadLiwc(filenames):
@@ -117,7 +117,7 @@ def prepareCalls(parameters, filenames, tags, output_dir):
 		#extracts unigrams
 		elif feature.lower() == 'unigram':
 			# loadCount(filenames, min_freq = 1, binary = False, normalize = True)
-			calls.append((bow.loadCount,[filenames]))
+			calls.append((bow.loadCount,[filenames,1, False, False]))
 		elif feature.lower() == 'unigram-binary':
 			# loadCount(filenames, min_freq = 1, binary = False, normalize = True)
 			calls.append((bow.loadCount,[filenames,1, True, False]))
