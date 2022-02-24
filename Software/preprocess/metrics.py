@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from preprocess import utils
+import utils
 import pandas as pd
 import numpy as np
 import string
 import re
+from nlpnet import POSTagger
 
 #supress some warnings about type conversion from nlpnet
 import warnings
 with warnings.catch_warnings():
 	warnings.filterwarnings("ignore",category=FutureWarning)
-	from nlpnet import POSTagger
+	
 
 #Note: this fucntion depends on how the atributes are stored and isn't really bugproof. Rewrite this whenever needed.
 def loadMetricsCSV(path):
