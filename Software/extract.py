@@ -2,7 +2,7 @@ import os
 import sys
 import argparse
 import logging
-from preprocess import liwc, bow, posSpacy, syntax, metrics
+from preprocess import liwc, bow, posSpacy, syntax, metrics, pos
 import numpy as np
 import pandas as pd
 
@@ -103,7 +103,7 @@ def prepareCalls(parameters, filenames, tags, output_dir):
 	calls = []
 	for feature in parameters:
 		#extracts POS
-		if feature.lower() == 'posSpacy':
+		if feature.lower() == 'posspacy':
 			#loadPos(filenames):
 			calls.append((posSpacy.loadPos,[filenames]))
 		#extracts LIWC tags

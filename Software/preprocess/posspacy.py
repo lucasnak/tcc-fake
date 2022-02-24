@@ -15,45 +15,45 @@ with warnings.catch_warnings():
 	#from nlpnet import POSTagger
 
 
-def countTags(text, tagger, normalize=True):
+# def countTags(text, tagger, normalize=True):
 
-	wordcount = 0
+# 	wordcount = 0
 
-	#pos tags used by nlpnet
-	pos_tags = {'ADJ': 0, 'ADV': 0, 'ADV-KS': 0, 'ART': 0, 'CUR': 0, 'IN': 0, 'KC': 0, 'KS': 0, 'N': 0, 'NPROP': 0, 'NUM': 0, 'PCP': 0, 'PDEN': 0, 'PREP': 0, 'PROADJ': 0, 'PRO-KS': 0, 'PROPESS': 0, 'PROSUB': 0, 'V': 0, 'PU': 0}
+# 	#pos tags used by nlpnet
+# 	pos_tags = {'ADJ': 0, 'ADV': 0, 'ADV-KS': 0, 'ART': 0, 'CUR': 0, 'IN': 0, 'KC': 0, 'KS': 0, 'N': 0, 'NPROP': 0, 'NUM': 0, 'PCP': 0, 'PDEN': 0, 'PREP': 0, 'PROADJ': 0, 'PRO-KS': 0, 'PROPESS': 0, 'PROSUB': 0, 'V': 0, 'PU': 0}
 
-	#counting frequencies
-	#for each resulting tuple from the tagging method
-	tagged_text = tagger.tag(text)
-	# print(tagged_text)
-	for res in tagged_text:
+# 	#counting frequencies
+# 	#for each resulting tuple from the tagging method
+# 	tagged_text = tagger.tag(text)
+# 	# print(tagged_text)
+# 	for res in tagged_text:
 
-		#counting number of tagged words in text
-		wordcount += len(res)
+# 		#counting number of tagged words in text
+# 		wordcount += len(res)
 
-		for word_result in res:
-			#sometimes one word gets more than one tag. Splitting it into two or more tags
-			split_result = word_result[1].replace('+',' ').split()
+# 		for word_result in res:
+# 			#sometimes one word gets more than one tag. Splitting it into two or more tags
+# 			split_result = word_result[1].replace('+',' ').split()
 
-			#increase the frequency of each tag
-			for tag in split_result:
-				pos_tags[tag] += 1
+# 			#increase the frequency of each tag
+# 			for tag in split_result:
+# 				pos_tags[tag] += 1
 
-	#saving the tags count to a Numpy array
-	# result = np.array(pos_tags)
-	result = np.array(list(pos_tags.values()))
-	# print(wordcount)
-	if(normalize):
-		try:
-			result = result / wordcount
-		except RuntimeWarning:
-			import ipdb; ipdb.set_trace()
+# 	#saving the tags count to a Numpy array
+# 	# result = np.array(pos_tags)
+# 	result = np.array(list(pos_tags.values()))
+# 	# print(wordcount)
+# 	if(normalize):
+# 		try:
+# 			result = result / wordcount
+# 		except RuntimeWarning:
+# 			import ipdb; ipdb.set_trace()
 
 	# for tag,value in zip(pos_tags,result):
 	# 	print("'{0}': {1:.2}".format(tag,value), end = ', ')
 	# print()
 
-	return result
+#	return result
 
 # def vectorize(text, tagger = None):
 
@@ -80,8 +80,8 @@ def loadPos(filenames):
 		    #returns a list with frequencies
 			doc = nlp(f.read())
 			for sent in doc.sents:
-				for token in sent:
-					c = Counter(([token.pos_ for token in sent for sent in doc.sents]))
-					print (c)
-					data.append(c)
+				c = Counter(([token.pos_ for token in sent for sent in doc.sents]))
+				data.append(c)
+			print (c)
 	return pd.DataFrame(data,columns=c.keys())
+	#return c
