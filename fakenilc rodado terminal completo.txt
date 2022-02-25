@@ -1,0 +1,277 @@
+Microsoft Windows [versão 10.0.19044.1526]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\vitor>cd Documents
+
+C:\Users\vitor\Documents>dir
+ O volume na unidade C não tem nome.
+ O Número de Série do Volume é 8ED6-4405
+
+ Pasta de C:\Users\vitor\Documents
+
+29/01/2022  14:31    <DIR>          .
+29/01/2022  14:31    <DIR>          ..
+14/10/2021  08:32    <DIR>          .ipynb_checkpoints
+21/01/2022  09:00    <DIR>          FakeNilc
+24/02/2022  08:09    <DIR>          Jupyter
+28/07/2021  22:15            12.994 Micros - MCU 8051.mcu8051ide
+28/07/2021  21:03            11.132 Micros - MCU 8051.mcu8051ide~
+25/01/2022  08:38    <DIR>          Pastas de testes TCC
+24/12/2021  13:18    <DIR>          Python Scripts
+29/01/2022  09:55    <DIR>          TCC
+29/01/2022  10:20    <DIR>          TCC.v2
+23/02/2022  08:49    <DIR>          TCC.v3
+               2 arquivo(s)         24.126 bytes
+              10 pasta(s)   65.039.753.216 bytes disponíveis
+
+C:\Users\vitor\Documents>git init
+Initialized empty Git repository in C:/Users/vitor/Documents/.git/
+
+C:\Users\vitor\Documents>git clone https://github.com/RafaelMonteiro95/FakeNilc.git
+Cloning into 'FakeNilc'...
+remote: Enumerating objects: 307, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (35/35), done.
+remote: Total 307 (delta 14), reused 12 (delta 0), pack-reused 271
+Receiving objects: 100% (307/307), 60.89 MiB | 393.00 KiB/s, done.
+Resolving deltas: 100% (173/173), done.
+
+C:\Users\vitor\Documents>cd FakeNilc
+
+C:\Users\vitor\Documents\FakeNilc>poetry install
+C:\Users\vitor\anaconda3\lib\site-packages\setuptools\command\install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+  warnings.warn(
+Installing dependencies from lock file
+
+No dependencies to install or update
+
+Installing the current project: FakeNilc (0.1.0)
+
+C:\Users\vitor\Documents\FakeNilc>curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+Retrieving Poetry metadata
+
+This installer is deprecated. Poetry versions installed using this script will not be able to use 'self update' command to upgrade to 1.2.0a1 or later.
+# Welcome to Poetry!
+
+This will download and install the latest version of Poetry,
+a dependency and package manager for Python.
+
+It will add the `poetry` command to Poetry's bin directory, located at:
+
+%USERPROFILE%\.poetry\bin
+
+This path will then be added to your `PATH` environment variable by
+modifying the `HKEY_CURRENT_USER/Environment/PATH` registry key.
+
+You can uninstall at any time by executing this script with the --uninstall option,
+and these changes will be reverted.
+
+Installing version: 1.1.13
+  - Downloading poetry-1.1.13-win32.tar.gz (71.14MB)
+
+Poetry (1.1.13) is installed now. Great!
+
+To get started you need Poetry's bin directory (%USERPROFILE%\.poetry\bin) in your `PATH`
+environment variable. Future applications will automatically have the
+correct environment, but you may need to restart your current shell.
+
+
+C:\Users\vitor\Documents\FakeNilc>curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+Retrieving Poetry metadata
+
+This installer is deprecated. Poetry versions installed using this script will not be able to use 'self update' command to upgrade to 1.2.0a1 or later.
+Latest version already installed.
+
+C:\Users\vitor\Documents\FakeNilc>poetry install
+Installing dependencies from lock file
+
+No dependencies to install or update
+
+Installing the current project: FakeNilc (0.1.0)
+
+C:\Users\vitor\Documents\FakeNilc>
+C:\Users\vitor\Documents\FakeNilc>git clone https://github.com/roneysco/Fake.br-Corpus.git
+Cloning into 'Fake.br-Corpus'...
+remote: Enumerating objects: 28763, done.
+remote: Total 28763 (delta 0), reused 0 (delta 0), pack-reused 28763
+Receiving objects: 100% (28763/28763), 37.10 MiB | 1.72 MiB/s, done.
+Resolving deltas: 100% (14129/14129), done.
+Updating files: 100% (21602/21602), done.
+
+C:\Users\vitor\Documents\FakeNilc>poetry run reduce -v -t Fake.br-Corpus/full_texts/
+
+C:\Users\vitor\Documents\FakeNilc>poetry run extract -v reduced_texts --features unigram-binary
+INFO:fakenilc.extract:generating filenames list
+INFO:fakenilc.extract:done
+INFO:fakenilc.extract:generating parameters list
+INFO:fakenilc.extract:done
+INFO:fakenilc.extract:Extracting unigram-binary
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\extract.py", line 212, in main
+    extractFeatures(parameters, calls, output_csv, ids, tags, verb)
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\extract.py", line 157, in extractFeatures
+    result = feature_method(*feature_parameters)
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\preprocess\bow.py", line 73, in loadCount
+    p = utils.preprocessor()
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\preprocess\utils.py", line 10, in __init__
+    with open('fakenilc/var/stopwords.txt') as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'fakenilc/var/stopwords.txt'
+
+C:\Users\vitor\Documents\FakeNilc>poetry run extract -v reduced_texts --features unigram-binary
+INFO:fakenilc.extract:generating filenames list
+INFO:fakenilc.extract:done
+INFO:fakenilc.extract:generating parameters list
+INFO:fakenilc.extract:done
+INFO:fakenilc.extract:Extracting unigram-binary
+INFO:fakenilc.extract:done. Creating csv
+INFO:fakenilc.extract:done
+INFO:fakenilc.extract:Extraction Complete
+
+C:\Users\vitor\Documents\FakeNilc>poetry run evaluate -c linearsvc -lc 4 -mf 3 -fs 100 --n_jobs 4 -sm unigram-binary.csv -d
+C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\externals\joblib\__init__.py:15: FutureWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=FutureWarning)
+INFO:fakenilc.evaluate:Loading dataset unigram-binary
+INFO:fakenilc.evaluate:Opening unigram-binary.csv
+INFO:fakenilc.evaluate:Applying frequency cut on dataframe with dimensions (7200, 23976)
+INFO:fakenilc.evaluate:Resulting dimensions: (7200, 10418)
+Dataset: unigram-binary
+INFO:fakenilc.evaluate:Dumping vocabulary to vocabulary.pkl
+INFO:fakenilc.evaluate:Splitting labels and data...
+INFO:fakenilc.evaluate:Selecting K best features...
+Best 100 features:
+[(0.014660115761008452, 'milionári'), (0.014661808687137068, 'saír'), (0.014753820700250442, 'anarqu'), (0.014763675765349094, 'perd'), (0.014809086713333697, 'fascist'), (0.014857399554603079, 'manchest'), (0.01490022477108166, 'tempor'), (0.014936829961561982, 'teóric'), (0.014947036904673361, 'precedent'), (0.015115645829051783, 'altar'), (0.015170357956286296, 'postag'), (0.01517780534512747, 'decisã'), (0.015192388563224801, 'peculi'), (0.015216296209084712, 'profissã'), (0.015282717411714053, 'menez'), (0.015297904251025507, 'manual'), (0.01534664860935786, 'pod'), (0.015356022800561364, 'secretár'), (0.015392406981475037, 'tinhos'), (0.015404573388848153, 'instrument'), (0.01545338758073811, 'dell'), (0.01546875890207744, 'dest'), (0.01552591494136868, 'portal'), (0.015534015758059905, 'através'), (0.015556458588463107, 'recessã'), (0.015614710493673689, 'repres'), (0.015621005399413912, 'consider'), (0.01564456242971124, 'psicoterapeut'), (0.01566758357757081, 'conclusã'), (0.01570378910237613, 'fals'), (0.01572768244067224, 'consign'), (0.01577198702535143, 'dolos'), (0.01580164325284561, 'raspã'), (0.015867186079987716, 'sext'), (0.01588729862487881, 'unem'), (0.015906087762846965, 'administr'), (0.01591720629425053, 'degrav'), (0.01593059012750353, 'damasc'), (0.01593239437327809, 'costamarqu'), (0.01594159501516934, 'neg'), (0.01596445475740782, 'canguru'), (0.015966240780623808, 'agênc'), (0.016004852075684806, 'micr'), (0.01605009759443754, 'ater'), (0.016142634038447623, 'embalagens'), (0.016152947226005132, 'pretensõ'), (0.016269602136616657, 'foment'), (0.016279602935300952, 'propôs'), (0.016297998007601677, 'israel'), (0.016315146449640272, 'tars'), (0.016353918824568048, 'sujeir'), (0.016414978366911637, 'tribunal'), (0.016421419335387544, 'derram'), (0.016430288227820666, 'formaliz'), (0.016517734224209546, 'paulinh'), (0.01652043048854801, 'antig'), (0.016522782102537104, 'lindbergh'), (0.01654177138064239, 'dilm'), (0.016603211049108335, 'colarinh'), (0.01663895249240599, 'entup'), (0.01671837426984113, 'organiz'), (0.016761472962514068, 'ocorr'), (0.01684092126929082, 'super'), (0.016925093950277637, 'arromb'), (0.017065945793867332, 'posicion'), (0.017219846253591298, 'regional'), (0.017265884709202206, 'chã'), (0.017276393389118683, 'manhã'), (0.017277113721656745, 'bimotor'), (0.017322767462695676, 'vultos'), (0.017381475735703145, 'ofend'), (0.01766573341165012, 'máquin'), (0.017764279881520073, 'novo'), (0.017864921342140905, 'regiã'), (0.01794624842290915, 'plástic'), (0.017985415885773737, 'espos'), (0.01811930465896827, 'lik'), (0.01851877035193672, 'acopl'), (0.018533011050615666, 'espontan'), (0.018635199591044094, 'luiz'), (0.018685371478899926, 'quart'), (0.018854809253910254, 'túnel'), (0.019021674460642624, 'víd'), (0.01952727314011038, 'montanh'), (0.01953194791461632, 'fm'), (0.019870812595843557, 'duel'), (0.02000822004459213, 'gráv'), (0.02051663508816115, 'caos'), (0.020764987436826532, 'maior'), (0.021048347799230926, 'diss'), (0.021325213617021888, 'reajust'), (0.021909753294392376, 'diár'), (0.022964829312381196, 'restant'), (0.023438775622819374, 'onça'), (0.02389897531667229, 'red'), (0.02869981097586005, 'quint'), (0.02996404797878549, 'terc'), (0.032402939917951956, 'segund'), (0.0763860643153853, 'nest'), (0.11602423173018672, 'feir')]
+INFO:fakenilc.evaluate:Evaluating LinearSVC
+INFO:fakenilc.evaluate:cross evaluating with 25.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed:  7.7min finished
+INFO:fakenilc.evaluate:cross evaluating with 50.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed: 15.5min finished
+INFO:fakenilc.evaluate:cross evaluating with 75.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed: 26.5min finished
+INFO:fakenilc.evaluate:cross evaluating with 100.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+Process LokyProcess-3:
+Traceback (most recent call last):
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\process_executor.py", line 418, in _process_worker
+    r = call_item()
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\process_executor.py", line 272, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\_parallel_backends.py", line 608, in __call__
+    return self.func(*args, **kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\parallel.py", line 255, in __call__
+    return [func(*args, **kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\parallel.py", line 255, in <listcomp>
+    return [func(*args, **kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\model_selection\_validation.py", line 841, in _fit_and_predict
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\pipeline.py", line 350, in fit
+    Xt, fit_params = self._fit(X, y, **fit_params)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\pipeline.py", line 311, in _fit
+    X, fitted_transformer = fit_transform_one_cached(
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\memory.py", line 355, in __call__
+    return self.func(*args, **kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\pipeline.py", line 728, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **fit_params)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\base.py", line 574, in fit_transform
+    return self.fit(X, y, **fit_params).transform(X)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\feature_selection\_univariate_selection.py", line 349, in fit
+    score_func_ret = self.score_func(X, y)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\feature_selection\_mutual_info.py", line 450, in mutual_info_classif
+    return _estimate_mi(X, y, discrete_features, True, n_neighbors,
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\feature_selection\_mutual_info.py", line 282, in _estimate_mi
+    X[:, continuous_mask] += 1e-10 * means * rng.randn(
+MemoryError: Unable to allocate 458. MiB for an array with shape (5760, 10418) and data type float64
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\vitor\anaconda3\lib\multiprocessing\process.py", line 315, in _bootstrap
+    self.run()
+  File "C:\Users\vitor\anaconda3\lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\process_executor.py", line 421, in _process_worker
+    result_queue.put(_ResultItem(call_item.work_id, exception=exc))
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\backend\queues.py", line 234, in put
+    obj = dumps(obj, reducers=self._reducers)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 247, in dumps
+    dump(obj, buf, reducers=reducers, protocol=protocol)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 240, in dump
+    _LokyPickler(file, reducers=reducers, protocol=protocol).dump(obj)
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\externals\cloudpickle\cloudpickle_fast.py", line 538, in dump
+    return Pickler.dump(self, obj)
+TypeError: cannot pickle 'property' object
+ERRO: o processo "2804" não foi encontrado.
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\evaluate.py", line 265, in main
+    predicts = predictAndEvaluate(clf, X, y, dataset_name, flags['lc'] , flags['n_jobs'], flags['v'], flags['fs'], flags['sm'])
+  File "C:\Users\vitor\Documents\FakeNilc\fakenilc\evaluate.py", line 160, in predictAndEvaluate
+    predicts.append( cross_val_predict(make_pipeline(SelectKBest(mutual_info_classif,feature_selection),classifier), X[:val], y[:val], cv=5, verbose=verbose, n_jobs=n_jobs) )
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\model_selection\_validation.py", line 753, in cross_val_predict
+    prediction_blocks = parallel(delayed(_fit_and_predict)(
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\parallel.py", line 1017, in __call__
+    self.retrieve()
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\parallel.py", line 909, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\joblib\_parallel_backends.py", line 562, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "C:\Users\vitor\anaconda3\lib\concurrent\futures\_base.py", line 439, in result
+    return self.__get_result()
+  File "C:\Users\vitor\anaconda3\lib\concurrent\futures\_base.py", line 388, in __get_result
+    raise self._exception
+joblib.externals.loky.process_executor.TerminatedWorkerError: A worker process managed by the executor was unexpectedly terminated. This could be caused by a segmentation fault while calling the function or by an excessive memory usage causing the Operating System to kill the worker.
+
+C:\Users\vitor\Documents\FakeNilc>poetry run evaluate -c linearsvc -lc 4 -mf 3 -fs 100 --n_jobs 4 -sm unigram-binary.csv -d
+C:\Users\vitor\AppData\Local\pypoetry\Cache\virtualenvs\fakenilc-B8Tu_1fr-py3.8\lib\site-packages\sklearn\externals\joblib\__init__.py:15: FutureWarning: sklearn.externals.joblib is deprecated in 0.21 and will be removed in 0.23. Please import this functionality directly from joblib, which can be installed with: pip install joblib. If this warning is raised when loading pickled models, you may need to re-serialize those models with scikit-learn 0.21+.
+  warnings.warn(msg, category=FutureWarning)
+INFO:fakenilc.evaluate:Loading dataset unigram-binary
+INFO:fakenilc.evaluate:Opening unigram-binary.csv
+INFO:fakenilc.evaluate:Applying frequency cut on dataframe with dimensions (7200, 23976)
+INFO:fakenilc.evaluate:Resulting dimensions: (7200, 10418)
+Dataset: unigram-binary
+INFO:fakenilc.evaluate:Dumping vocabulary to vocabulary.pkl
+INFO:fakenilc.evaluate:Splitting labels and data...
+INFO:fakenilc.evaluate:Selecting K best features...
+Best 100 features:
+[(0.014424883146838097, 'brech'), (0.014432017936593766, 'àquil'), (0.014450428815766525, 'injuri'), (0.014458694879918577, 'regiã'), (0.014522695190793078, 'tvs'), (0.014527590041050642, 'tir'), (0.014562727107453766, 'racial'), (0.014564696670923638, 'prudent'), (0.014645926670045606, 'localiz'), (0.014654894784309258, 'fez'), (0.01472268142770572, 'camboriú'), (0.014744012456163746, 'pública'), (0.014769494074863276, 'decorrent'), (0.014800712157217788, 'disting'), (0.014835350374423628, 'primeir'), (0.014908206673621915, 'víd'), (0.014932090803088105, 'victor'), (0.014971079812826638, 'esquerdopat'), (0.014994537891938053, 'racism'), (0.015156038052996701, 'embut'), (0.015245031793191144, 'teim'), (0.015257290637414878, 'dailymail'), (0.015294141733006361, 'merc'), (0.01530415729128598, 'negóci'), (0.015305118542710883, 'abrah'), (0.0153316349831083, 'afirm'), (0.015340138487258237, 'responsabiliz'), (0.01539318252927302, 'goian'), (0.015410683141668269, 'stanford'), (0.015488205612508521, 'graus'), (0.015499639321002068, 'maquiador'), (0.015574733068640434, 'dilm'), (0.015578289051394467, 'honest'), (0.015701330785337753, 'juventud'), (0.01573469738242972, 'liçã'), (0.015787459214442023, 'mental'), (0.015803887800046157, 'comissõ'), (0.015811126675077558, 'abaf'), (0.01587276716244479, 'hiperat'), (0.015954966209606347, 'nucl'), (0.016040728298609697, 'uberab'), (0.016086969563197995, 'duv'), (0.016143373517740978, 'cot'), (0.016170463297443094, 'rebulic'), (0.01620839748633829, 'execut'), (0.016351237928585283, 'expulsã'), (0.01638885839396642, 'lasc'), (0.016421146634104655, 'frac'), (0.016430660806189268, 'potável'), (0.016527676607152486, 'cachoeir'), (0.016575662077803033, 'constat'), (0.016693859645820153, 'visit'), (0.01671291397440311, 'feit'), (0.016738245823558984, 'encher'), (0.016788556938288846, 'mariz'), (0.016841248324297453, 'biotecnolog'), (0.016873624591677405, 'emergent'), (0.016886524207954334, 'luiz'), (0.016920738720286765, 'lamb'), (0.016923173218259535, 'play'), (0.016966469119345184, 'mutu'), (0.01705810313736933, 'cáss'), (0.017075773420970997, 'artur'), (0.01711461925125768, 'dúz'), (0.01712529313369071, 'andav'), (0.01714786758829101, 'alexandr'), (0.01753576352916486, 'frágil'), (0.017856557546021, 'costum'), (0.017910029703450236, 'bod'), (0.017947106064958973, 'exclus'), (0.01832568951102509, 'canet'), (0.018346254248050142, 'fof'), (0.018453083594651698, 'através'), (0.018512941563338048, 'ano'), (0.018514192954670383, 'cumul'), (0.01859053239881603, 'hipócrit'), (0.01867814309586091, 'milionári'), (0.018795809719357903, 'cuspidor'), (0.0188460438902871, 'pizzolatt'), (0.018927094200342554, 'pin'), (0.019125839893687546, 'jaul'), (0.019143872441515608, 'cançã'), (0.019197664636289913, 'bar'), (0.019807387424414902, 'fm'), (0.019903365963687136, 'tud'), (0.02027077279541656, 'dest'), (0.021390830343322786, 'rsrs'), (0.02139945390786746, 'blus'), (0.0214062248579594, 'nav'), (0.021624607139809404, 'alvo'), (0.022432832721964058, 'evit'), (0.022922720404667363, 'quint'), (0.022954384047616516, 'hoj'), (0.024117720662509834, 'tirotei'), (0.027553578514187382, 'segund'), (0.028380595724439628, 'tribunal'), (0.030443817937835238, 'quart'), (0.030553717697917815, 'terc'), (0.0844611603242702, 'nest'), (0.12062169425441804, 'feir')]
+INFO:fakenilc.evaluate:Evaluating LinearSVC
+INFO:fakenilc.evaluate:cross evaluating with 25.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed:  7.7min finished
+INFO:fakenilc.evaluate:cross evaluating with 50.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed: 15.6min finished
+INFO:fakenilc.evaluate:cross evaluating with 75.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed: 24.0min finished
+INFO:fakenilc.evaluate:cross evaluating with 100.0% of corpus
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 out of   5 | elapsed: 33.3min finished
+INFO:fakenilc.evaluate:Trainig model linearsvc_unigram-binary on full dataset
+INFO:fakenilc.evaluate:Printing Results
+Classifier: LinearSVC
+Accuracy: 0.7683333333333333
+              precision    recall  f1-score   support
+
+        FAKE       0.73      0.84      0.78      3600
+        REAL       0.82      0.69      0.75      3600
+
+    accuracy                           0.77      7200
+   macro avg       0.77      0.77      0.77      7200
+weighted avg       0.77      0.77      0.77      7200
+
+Confusion Matrix:
+ a      b     <--- Classified as
+ 2499    567   a = REAL
+ 1101   3033   b = FAKE
+
+
+Learning curve:
+[0.7494444444444445, 0.7363888888888889, 0.7459259259259259, 0.7683333333333333]
+==============
+INFO:fakenilc.evaluate:Done
+
+C:\Users\vitor\Documents\FakeNilc>
