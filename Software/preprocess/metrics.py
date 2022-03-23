@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import utils
+from preprocess import utils
 import pandas as pd
 import numpy as np
 import string

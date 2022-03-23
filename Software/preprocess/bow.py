@@ -1,4 +1,5 @@
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from preprocess import utils
 import numpy as np
 import pandas as pd
@@ -86,4 +87,14 @@ def loadCount(filenames, min_freq = 1, binary = False, normalize = True):
 		data = normalizeData()
 
 	#returns a pandas dataframe with data and labels
+	return pd.DataFrame(data,columns = labels)
+
+def loadTfidf(filenames):
+	p = utils.preprocessor()
+
+	vectorizer = TfidfVectorizer(input = 'filename', preprocessor = p.prep, encoding='utf-8')
+	
+	data = np.array(vectorizer.fit_transform(filenames).todense());
+	labels = np.array(vectorizer.get_feature_names())
+
 	return pd.DataFrame(data,columns = labels)

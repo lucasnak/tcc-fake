@@ -2,7 +2,9 @@ import os
 import sys
 import argparse
 import logging
-from preprocess import liwc, bow, posSpacy, syntax, metrics, pos
+
+from isort import file
+from preprocess import liwc, bow, posSpacy, syntax, metrics #,pos
 import numpy as np
 import pandas as pd
 
@@ -15,6 +17,7 @@ def parseArguments():
 		# all these extraction methods arent working correctly
 		# 'liwc',
 		'posSpacy',
+		'tf-idf',
 		# 'metrics',
 		# 'pausality',
 		# 'uncertainty',
@@ -121,6 +124,8 @@ def prepareCalls(parameters, filenames, tags, output_dir):
 		elif feature.lower() == 'unigram-binary':
 			# loadCount(filenames, min_freq = 1, binary = False, normalize = True)
 			calls.append((bow.loadCount,[filenames,1, True, False]))
+		elif feature.lower() == 'tf-idf':
+			calls.append((bow.loadTfidf,[filenames]))
 		elif feature.lower() == 'uncertainty':
 			calls.append((metrics.getUncertainty,[filenames, output_dir]))
 		elif feature.lower() == 'pausality':
